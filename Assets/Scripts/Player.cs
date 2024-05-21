@@ -32,9 +32,19 @@ public class Player : MonoBehaviour
     private void AnimateSprite()
     {
         spriteIndex++;
+
         if(spriteIndex >= sprites.Length){
             spriteIndex = 0;
         }
         spriteRenderer.sprite = sprites[spriteIndex];
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Ostacle"){
+            FindObjectOfType<GameManager>().GameOver();
+        } else if (other.gameObject.tag == "Scoring"){
+            FindObjectOfType<GameManager>().IncreaseScore();
+        }
     }
 }
