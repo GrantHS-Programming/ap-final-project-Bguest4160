@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private int spriteIndex;
+    
     private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 5f;
@@ -41,9 +42,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Ostacle"){
+        if (other.gameObject.tag == "Obstacle"){
             FindObjectOfType<GameManager>().GameOver();
-        } else if (other.gameObject.tag == "Scoring"){
+        } 
+        else if (other.gameObject.tag == "Scoring"){
             FindObjectOfType<GameManager>().IncreaseScore();
         }
     }
