@@ -9,17 +9,27 @@ public class GameManager : MonoBehaviour
 {
     public Player player;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI congrats;
+    public TextMeshProUGUI highScoreText;
     public GameObject playButton;
     public GameObject gameOver;
     private int score;
+    private int highScore;
+
 
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        gameOver.SetActive(false);
+        highScore = 0;
+        highScoreText.text = highScore.ToString();
         Pause();
+        congrats.enabled = false;
+    
     }
     public void Play()
     {
+        congrats.enabled = false;
         score = 0;
         scoreText.text = score.ToString();
 
@@ -42,6 +52,11 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        if(highScore < score){
+            highScore = score;
+            highScoreText.text = highScore.ToString();
+            congrats.enabled = true;
+        }
         Pause();
         gameOver.SetActive(true);
         playButton.SetActive(true);
