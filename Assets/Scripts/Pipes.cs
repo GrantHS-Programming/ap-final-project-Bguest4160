@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pipes : MonoBehaviour
 {
-     public float speed = 5f;
+     public int speed = 5;
 
      private float leftEdge;
      private void Start()
@@ -20,4 +20,5 @@ public class Pipes : MonoBehaviour
             Destroy(gameObject);
         }
      }
+
 }
