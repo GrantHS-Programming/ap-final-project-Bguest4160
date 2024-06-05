@@ -13,12 +13,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     public GameObject playButton;
     public GameObject gameOver;
-    public GameObject easy;
-    public GameObject medium;
-    public GameObject hard;
-    public GameObject playAgainButton;
     private int score;
     private int highScore;
+    public Image start;
 
 
     private void Awake()
@@ -29,10 +26,7 @@ public class GameManager : MonoBehaviour
         highScoreText.text = highScore.ToString();
         Pause();
         congrats.enabled = false;
-        easy.SetActive(false);
-        medium.SetActive(false);
-        hard.SetActive(false);
-        playAgainButton.SetActive(false);
+        start.enabled = true;
 
     
     }
@@ -45,69 +39,17 @@ public class GameManager : MonoBehaviour
         playButton.SetActive(false);
         gameOver.SetActive(false);
 
-        easy.SetActive(true);
-        medium.SetActive(true);
-        hard.SetActive(true);
-
-        
-    }
-    public void PlayEasy()
-    {
-        Time.timeScale = 1f;
+         Time.timeScale = 1f;
         player.enabled = true;
         Pipes[] pipes = FindObjectsOfType<Pipes>();
 
         for(int i = 0; i < pipes.Length; i++){
             Destroy(pipes[i].gameObject);
         }
-        easy.SetActive(false);
-        medium.SetActive(false);
-        hard.SetActive(false);
+
+        start.enabled = false;
     }
-     public void PlayMedium()
-    {
-        
-        Time.timeScale = 1f;
-        player.enabled = true;
-        Pipes[] pipes = FindObjectsOfType<Pipes>();
 
-        for(int i = 0; i < pipes.Length; i++){
-            Destroy(pipes[i].gameObject);
-        }
-        easy.SetActive(false);
-        medium.SetActive(false);
-        hard.SetActive(false);
-    }
-     public void PlayHard()
-    {
-        Time.timeScale = 1f;
-        player.enabled = true;
-        Pipes[] pipes = FindObjectsOfType<Pipes>();
-
-        for(int i = 0; i < pipes.Length; i++){
-            Destroy(pipes[i].gameObject);
-        }
-        easy.SetActive(false);
-        medium.SetActive(false);
-        hard.SetActive(false);
-    }
-    public void PlayAgain()
-    {
-        congrats.enabled = false;
-        score = 0;
-        scoreText.text = score.ToString();
-
-        playAgainButton.SetActive(false);
-        gameOver.SetActive(false);
-
-        Time.timeScale = 1f;
-        player.enabled = true;
-        Pipes[] pipes = FindObjectsOfType<Pipes>();
-
-        for(int i = 0; i < pipes.Length; i++){
-            Destroy(pipes[i].gameObject);
-        }
-    }
 
     public void Pause()
     {
@@ -123,7 +65,7 @@ public class GameManager : MonoBehaviour
         }
         Pause();
         gameOver.SetActive(true);
-        playAgainButton.SetActive(true);
+        playButton.SetActive(true);
     }
     
     public void IncreaseScore()
