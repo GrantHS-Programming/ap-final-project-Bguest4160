@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     public GameObject playButton;
     public GameObject gameOver;
+    public GameObject firework1;
+
+    public GameObject firework2;
+    public TextMeshProUGUI fail;
     private int score;
     private int highScore;
     public Image start;
@@ -26,21 +30,28 @@ public class GameManager : MonoBehaviour
         highScoreText.text = highScore.ToString();
         Pause();
         congrats.enabled = false;
+        fail.enabled = false;
         start.enabled = true;
+        firework1.SetActive(false);
+        firework2.SetActive(false);
 
     
     }
     public void Play()
     {
-        congrats.enabled = false;
         score = 0;
         scoreText.text = score.ToString();
 
+        firework1.SetActive(false);
+        firework2.SetActive(false);
         playButton.SetActive(false);
         gameOver.SetActive(false);
+        congrats.enabled = false;
+        fail.enabled = false;
 
-         Time.timeScale = 1f;
+        Time.timeScale = 1f;
         player.enabled = true;
+
         Pipes[] pipes = FindObjectsOfType<Pipes>();
 
         for(int i = 0; i < pipes.Length; i++){
@@ -53,8 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f;
         player.enabled = false;
+        Time.timeScale = 0f;
     }
     public void GameOver()
     {
@@ -62,6 +73,11 @@ public class GameManager : MonoBehaviour
             highScore = score;
             highScoreText.text = highScore.ToString();
             congrats.enabled = true;
+            firework1.SetActive(true);
+            firework2.SetActive(true);
+        }
+        else{
+            fail.enabled = true;
         }
         Pause();
         gameOver.SetActive(true);
